@@ -53,9 +53,9 @@ class LoginViewModel @Inject constructor() : ViewModel() {
 		}
 	}
 
-	fun isLoggedIn(context: Context) {
-		GoogleSignIn.getLastSignedInAccount(context) ?: return
-		updateUiState(LoginState.UserLoggedIn(false))
+	fun isLoggedIn(context: Context): Boolean {
+		GoogleSignIn.getLastSignedInAccount(context) ?: return false
+		return true
 	}
 }
 

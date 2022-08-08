@@ -10,16 +10,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.jacob.disasteralertapp.R
-import com.jacob.disasteralertapp.databinding.FragmentLoginBinding
+import com.jacob.disasteralertapp.databinding.LoginFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class LoginFragment : Fragment(R.layout.fragment_login) {
-	private val binding: FragmentLoginBinding by viewBinding()
+class LoginFragment : Fragment(R.layout.login_fragment) {
+	private val binding: LoginFragmentBinding by viewBinding()
 	private val viewModel: LoginViewModel by viewModels()
+	private lateinit var directions: NavDirections
 
 	private val resultLauncher = registerForActivityResult(StartActivityForResult()) { result ->
 		when (result?.resultCode) {
@@ -28,19 +30,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 		}
 	}
 
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		super.onViewCreated(view, savedInstanceState)
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
 
-		var directions = LoginFragmentDirections.toUserRegistrationDetailsFragment()
-
-		binding.userSignInButton.setOnClickListener {
-			directions = LoginFragmentDirections.toUserRegistrationDetailsFragment()
-			googleSignIn()
-		}
-		binding.ngoSignInButton.setOnClickListener {
-			directions = LoginFragmentDirections.toNgoRegistrationDetailsFragment()
-			googleSignIn()
-		}
+//		if (viewModel.isLoggedIn(requireContext())) {
+//			findNavController().navigate(LoginFragmentDirections.toHomeFragment())
+//			return
+//		}
 
 		lifecycleScope.launch {
 			viewModel.loginState
@@ -51,12 +47,25 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 						is LoginState.Error -> print(it.exception)
 						is LoginState.UserLoggedIn -> {
 							when (it.isNewUser) {
-								false -> findNavController().navigate(LoginFragmentDirections.toHomeFragment())
+								false -> findNavController().navigate(LoginFragmentDirections.toNgoRegistrationDetailsFragment())
 								true -> findNavController().navigate(directions)
 							}
 						}
 					}
 				}
+		}
+	}
+
+	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+		super.onViewCreated(view, savedInstanceState)
+
+		binding.userSignInButton.setOnClickListener {
+			directions = LoginFragmentDirections.toUserRegistrationDetailsFragment()
+			googleSignIn()
+		}
+		binding.ngoSignInButton.setOnClickListener {
+			directions = LoginFragmentDirections.toNgoRegistrationDetailsFragment()
+			googleSignIn()
 		}
 	}
 
@@ -66,9 +75,4 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 			requireActivity()
 		)
 	)
-
-	override fun onStart() {
-		super.onStart()
-//		viewModel.isLoggedIn(requireContext())
-	}
 }
