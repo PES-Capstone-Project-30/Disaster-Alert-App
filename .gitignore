@@ -14,3 +14,4 @@
 .cxx
 local.properties
 /.idea/sonarlint/issuestore/
+/app/google-services.json

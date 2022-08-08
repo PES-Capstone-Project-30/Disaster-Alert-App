@@ -5,8 +5,10 @@ plugins {
 	id("org.jetbrains.kotlin.android")
 	id("kotlin-android")
 
+	id("androidx.navigation.safeargs.kotlin")
 	kotlin("kapt")
 	id("dagger.hilt.android.plugin")
+	id("com.google.gms.google-services")
 }
 
 android {
@@ -44,14 +46,6 @@ android {
 	buildFeatures {
 		viewBinding = true
 	}
-
-	sourceSets {
-		getByName("main") {
-			res {
-				srcDirs("src/main/res", "src/main/res/layout/login")
-			}
-		}
-	}
 }
 
 dependencies {
@@ -71,6 +65,10 @@ dependencies {
 
 	implementation("com.google.dagger:hilt-android:2.43")
 	kapt("com.google.dagger:hilt-android-compiler:2.43")
+
+	implementation(platform("com.google.firebase:firebase-bom:30.3.1"))
+	implementation("com.google.firebase:firebase-auth-ktx")
+	implementation("com.google.android.gms:play-services-auth:20.2.0")
 
 	implementation("com.github.yogacp:android-viewbinding:1.0.4")
 

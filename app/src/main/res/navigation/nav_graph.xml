@@ -11,19 +11,22 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_registrationDetailsFragment"
-            app:destination="@id/registrationDetailsFragment" />
+            android:id="@+id/to_userRegistrationDetailsFragment"
+            app:destination="@id/userRegistrationDetailsFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
+            android:id="@+id/to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/to_ngoRegistrationDetailsFragment"
+            app:destination="@id/ngoRegistrationDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/registrationDetailsFragment"
-        android:name="com.jacob.disasteralertapp.login.RegistrationDetailsFragment"
+        android:id="@+id/userRegistrationDetailsFragment"
+        android:name="com.jacob.disasteralertapp.login.UserRegistrationDetailsFragment"
         android:label="fragment_registration_details"
-        tools:layout="@layout/fragment_registration_details" >
+        tools:layout="@layout/fragment_user_registration_details" >
         <action
-            android:id="@+id/action_registrationDetailsFragment_to_homeFragment"
+            android:id="@+id/to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment
@@ -31,4 +34,13 @@
         android:name="com.jacob.disasteralertapp.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/ngoRegistrationDetailsFragment"
+        android:name="com.jacob.disasteralertapp.login.NgoRegistrationDetailsFragment"
+        android:label="fragment_ngo_registration_details"
+        tools:layout="@layout/fragment_ngo_registration_details" >
+        <action
+            android:id="@+id/to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 </navigation>
