@@ -1,4 +1,4 @@
-package com.jacob.disasteralertapp.login.registration.ngo
+package com.jacob.disasteralertapp.login.ui.registration.ngo
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

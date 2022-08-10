@@ -1,4 +1,4 @@
-package com.jacob.disasteralertapp.login
+package com.jacob.disasteralertapp.login.ui
 
 import android.app.Activity
 import android.os.Bundle
@@ -71,8 +71,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 
 	private fun googleSignIn() = resultLauncher.launch(
 		viewModel.getGoogleSignInIntent(
-			getString(R.string.default_web_client_id),
-			requireActivity()
+			getString(R.string.default_web_client_id), requireActivity()
 		)
 	)
 }

@@ -1,11 +1,11 @@
-package com.jacob.disasteralertapp.login.registration.user
+package com.jacob.disasteralertapp.login.ui.registration.user
 
 import android.viewbinding.library.fragment.viewBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.jacob.disasteralertapp.R
 import com.jacob.disasteralertapp.databinding.UserRegistrationDetailsFragmentBinding
-import com.jacob.disasteralertapp.login.LoginViewModel
+import com.jacob.disasteralertapp.login.ui.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

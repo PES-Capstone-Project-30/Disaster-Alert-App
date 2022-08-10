@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.jacob.disasteralertapp.login.LoginFragment"
+        android:name="com.jacob.disasteralertapp.login.ui.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/login_fragment" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/userRegistrationDetailsFragment"
-        android:name="com.jacob.disasteralertapp.login.registration.user.UserRegistrationDetailsFragment"
+        android:name="com.jacob.disasteralertapp.login.ui.registration.user.UserRegistrationDetailsFragment"
         android:label="fragment_registration_details"
         tools:layout="@layout/user_registration_details_fragment" >
         <action
@@ -36,7 +36,7 @@
         tools:layout="@layout/home_fragment" />
     <fragment
         android:id="@+id/ngoRegistrationDetailsFragment"
-        android:name="com.jacob.disasteralertapp.login.registration.ngo.NgoRegistrationDetailsFragment"
+        android:name="com.jacob.disasteralertapp.login.ui.registration.ngo.NgoRegistrationDetailsFragment"
         android:label="fragment_ngo_registration_details"
         tools:layout="@layout/ngo_registration_details_fragment" >
         <action

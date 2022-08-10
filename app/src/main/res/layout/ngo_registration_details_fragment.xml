@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".login.registration.ngo.NgoRegistrationDetailsFragment"
+    tools:context=".login.ui.registration.ngo.NgoRegistrationDetailsFragment"
     tools:ignore="HardcodedText">
 
     <LinearLayout
@@ -53,7 +53,7 @@
             tools:ignore="LabelFor" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.jacob.disasteralertapp.login.registration.ngo.NgoRegistrationDetailsNewNgo
+    <com.jacob.disasteralertapp.login.ui.registration.ngo.NgoRegistrationDetailsNewNgo
         android:id="@+id/new_ngo_details_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
