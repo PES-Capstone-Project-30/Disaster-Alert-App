@@ -47,7 +47,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
 						is LoginState.Error -> print(it.exception)
 						is LoginState.UserLoggedIn -> {
 							when (it.isNewUser) {
-								false -> findNavController().navigate(LoginFragmentDirections.toNgoRegistrationDetailsFragment())
+								false -> findNavController().navigate(directions)
 								true -> findNavController().navigate(directions)
 							}
 						}

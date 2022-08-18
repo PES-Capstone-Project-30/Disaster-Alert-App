@@ -25,7 +25,7 @@ class NgoRegistrationDetailsFragment : Fragment(R.layout.ngo_registration_detail
 
 		autoCompleteTextView?.setOnItemClickListener { adapterView, _, position, _ ->
 			val item = adapterView.getItemAtPosition(position) as String
-			println(item)
+			binding.doneBtn.isEnabled = true
 			if (item == "Other") {
 				binding.newNgoDetailsSection.visibility = View.VISIBLE
 			} else {

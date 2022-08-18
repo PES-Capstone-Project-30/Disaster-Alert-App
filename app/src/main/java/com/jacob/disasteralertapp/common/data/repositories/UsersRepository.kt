@@ -23,6 +23,5 @@ class UsersRepository @Inject constructor(
 		awaitClose()
 	}
 
-	fun saveUser(user: User) = userCollection.document(user.id)
-		.set(user.toUserDTO())
+	fun addUser(user: User) = userCollection.add(user.toUserDTO())
 }
