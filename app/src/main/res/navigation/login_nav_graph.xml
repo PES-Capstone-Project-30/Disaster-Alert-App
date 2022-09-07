@@ -9,38 +9,22 @@
         android:id="@+id/loginFragment"
         android:name="com.jacob.disasteralertapp.login.ui.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/login_fragment" >
+        tools:layout="@layout/login_fragment">
         <action
             android:id="@+id/to_ngoRegistrationDetailsFragment"
             app:destination="@id/ngoRegistrationDetailsFragment" />
         <action
             android:id="@+id/to_userRegistrationDetailsFragment"
             app:destination="@id/userRegistrationDetailsFragment" />
-        <action
-            android:id="@+id/to_homeFragment"
-            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/userRegistrationDetailsFragment"
         android:name="com.jacob.disasteralertapp.login.ui.registration.user.UserRegistrationDetailsFragment"
         android:label="fragment_registration_details"
-        tools:layout="@layout/user_registration_details_fragment" >
-        <action
-            android:id="@+id/to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.jacob.disasteralertapp.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/home_fragment" />
+        tools:layout="@layout/user_registration_details_fragment" />
     <fragment
         android:id="@+id/ngoRegistrationDetailsFragment"
         android:name="com.jacob.disasteralertapp.login.ui.registration.ngo.NgoRegistrationDetailsFragment"
         android:label="fragment_ngo_registration_details"
-        tools:layout="@layout/ngo_registration_details_fragment" >
-        <action
-            android:id="@+id/to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+        tools:layout="@layout/ngo_registration_details_fragment" />
 </navigation>

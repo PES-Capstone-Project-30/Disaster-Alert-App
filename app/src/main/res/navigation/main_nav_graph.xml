@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/ngo_list">
+
+    <fragment
+        android:id="@+id/ngo_list"
+        android:name="com.jacob.disasteralertapp.ngolist.NgoListFragment"
+        android:label="Ngo List"
+        tools:layout="@layout/ngo_list_fragment" />
+
+    <fragment
+        android:id="@+id/disaster_map"
+        android:name="com.jacob.disasteralertapp.map.DisasterMapFragment"
+        android:label="Map"
+        tools:layout="@layout/disaster_map_fragment" />
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.jacob.disasteralertapp.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/profile_fragment" />
+</navigation>
