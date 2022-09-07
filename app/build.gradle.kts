@@ -1,4 +1,6 @@
-@file:Suppress("UnstableApiUsage")
+@file:Suppress("UnstableApiUsage", "SpellCheckingInspection")
+
+import android.annotation.SuppressLint
 
 plugins {
 	id("com.android.application")
@@ -10,13 +12,13 @@ plugins {
 	id("dagger.hilt.android.plugin")
 	id("com.google.gms.google-services")
 }
-
 android {
 	compileSdk = 32
 
 	defaultConfig {
 		applicationId = "com.jacob.disasteralertapp"
 		minSdk = 29
+		@SuppressLint("OldTargetApi")
 		targetSdk = 32
 		versionCode = 1
 		versionName = "1.0"
@@ -28,8 +30,7 @@ android {
 		getByName("release") {
 			isMinifyEnabled = true
 			proguardFiles(
-				getDefaultProguardFile("proguard-android.txt"),
-				"proguard-rules.pro"
+				getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
 			)
 		}
 	}
@@ -49,16 +50,14 @@ android {
 }
 
 dependencies {
-	val navigationVersion = "2.5.1"
-
 	implementation("androidx.legacy:legacy-support-v4:1.0.0")
 	implementation("androidx.core:core-ktx:1.8.0")
-	implementation("androidx.appcompat:appcompat:1.4.2")
+	implementation("androidx.appcompat:appcompat:1.5.0")
 	implementation("com.google.android.material:material:1.6.1")
 	implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
-	implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
-	implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
+	implementation("androidx.navigation:navigation-fragment-ktx:2.5.1")
+	implementation("androidx.navigation:navigation-ui-ktx:2.5.1")
 
 	implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
 	implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
@@ -68,12 +67,13 @@ dependencies {
 
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4")
 
-	implementation("com.google.android.gms:play-services-auth:20.2.0")
+	implementation("com.google.android.gms:play-services-auth:20.3.0")
 	implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
 	implementation("com.google.firebase:firebase-auth-ktx")
 	implementation("com.google.firebase:firebase-firestore-ktx")
 
 	implementation("com.github.yogacp:android-viewbinding:1.0.4")
+	implementation("com.jakewharton.timber:timber:5.0.1")
 
 	testImplementation("junit:junit:4.13.2")
 	androidTestImplementation("androidx.test.ext:junit:1.1.3")

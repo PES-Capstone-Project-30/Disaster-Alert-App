@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.jacob.disasteralertapp.common.AuthData
 import com.jacob.disasteralertapp.common.data.repositories.UsersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-	private val firebaseAuth: FirebaseAuth,
+	private val authData: AuthData,
 	private val usersRepository: UsersRepository,
 ) : ViewModel() {
 	private val _loginState = MutableSharedFlow<LoginState>()
@@ -37,9 +37,8 @@ class LoginViewModel @Inject constructor(
 		updateUiState(LoginState.Loading)
 		GoogleSignIn.getSignedInAccountFromIntent(data)
 			.addOnSuccessListener { account ->
-				println("account = ${account.displayName}")
 				val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-				firebaseAuth.signInWithCredential(credential)
+				authData.firebaseAuth.signInWithCredential(credential)
 					.addOnSuccessListener {
 						val isNewUser = it.additionalUserInfo?.isNewUser ?: true
 						updateUiState(LoginState.UserLoggedIn(isNewUser))
@@ -54,10 +53,7 @@ class LoginViewModel @Inject constructor(
 		}
 	}
 
-	fun isLoggedIn(context: Context): Boolean {
-		GoogleSignIn.getLastSignedInAccount(context) ?: return false
-		return true
-	}
+	fun isLoggedIn(context: Context) = authData.isUserPreviouslyLoggedIn(context)
 }
 
 sealed class LoginState {
