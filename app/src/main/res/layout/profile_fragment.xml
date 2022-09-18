@@ -5,9 +5,41 @@
     android:layout_height="match_parent"
     tools:context=".profile.ProfileFragment">
 
+    <ImageView
+        android:id="@+id/userProfileImage"
+        android:layout_width="125dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="107dp"
+        android:layout_marginEnd="155dp"
+        android:layout_marginBottom="529dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:src="@tools:sample/avatars" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Profile" />
+        android:id="@+id/userName"
+        android:layout_width="165dp"
+        android:layout_height="46dp"
+        android:text="Username"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="123dp"
+        tools:layout_editor_absoluteY="229dp" />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Location"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="166dp"
+        tools:layout_editor_absoluteY="275dp" />
 
 </FrameLayout>
