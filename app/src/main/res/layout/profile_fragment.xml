@@ -7,78 +7,109 @@
     android:outlineProvider="none"
     tools:context=".profile.ProfileFragment">
 
-    <ImageView
-        android:id="@+id/userProfileImage"
-        android:layout_width="125dp"
-        android:layout_height="109dp"
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="107dp"
-        android:layout_marginEnd="155dp"
-        android:layout_marginBottom="529dp"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/profileOuterLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintVertical_bias="1.0">
 
-    <TextView
-        android:id="@+id/userName"
-        android:layout_width="165dp"
-        android:layout_height="46dp"
-        android:text="Username"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="123dp"
-        tools:layout_editor_absoluteY="229dp" />
+        <ImageView
+            android:id="@+id/goBackButton"
+            android:layout_width="42dp"
+            android:layout_height="41dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_arrow_back" />
 
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Location"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="166dp"
-        tools:layout_editor_absoluteY="275dp" />
+        <Button
+            android:id="@+id/logOutButton"
+            android:layout_width="253dp"
+            android:layout_height="59dp"
+            android:text="Log Out"
+            android:textSize="18sp"
+            app:icon="@android:drawable/ic_lock_power_off"
+            app:layout_constraintBottom_toBottomOf="@id/profileOuterLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userProfileImage"
+            app:layout_constraintVertical_bias="0.83"
+            tools:ignore="HardcodedText" />
 
-    <Button
-        android:id="@+id/editProfileButton"
-        android:layout_width="253dp"
-        android:layout_height="59dp"
-        android:text="Edit Profile"
-        android:textSize="18sp"
-        app:icon="@android:drawable/ic_menu_edit"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="360dp" />
+        <Button
+            android:id="@+id/settingsButton"
+            android:layout_width="253dp"
+            android:layout_height="59dp"
+            android:text="Settings"
+            android:textSize="18sp"
+            app:icon="@android:drawable/ic_menu_manage"
+            app:layout_constraintBottom_toTopOf="@id/logOutButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userProfileImage"
+            app:layout_constraintVertical_bias="0.911"
+            tools:ignore="HardcodedText" />
 
-    <Button
-        android:id="@+id/settingsButton"
-        android:layout_width="253dp"
-        android:layout_height="59dp"
-        android:text="Settings"
-        android:textSize="18sp"
-        app:icon="@android:drawable/ic_menu_manage"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="440dp" />
+        <Button
+            android:id="@+id/editProfileButton"
+            android:layout_width="253dp"
+            android:layout_height="59dp"
+            android:text="Edit Profile"
+            android:textSize="18sp"
+            app:icon="@android:drawable/ic_menu_edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/settingsButton"
+            app:layout_constraintTop_toBottomOf="@id/userProfileImage"
+            app:layout_constraintVertical_bias="0.88"
+            tools:ignore="HardcodedText" />
 
-    <Button
-        android:id="@+id/logOutButton"
-        android:layout_width="253dp"
-        android:layout_height="59dp"
-        android:text="Log Out"
-        android:textSize="18sp"
-        app:icon="@android:drawable/ic_lock_power_off"
-        tools:layout_editor_absoluteX="79dp"
-        tools:layout_editor_absoluteY="522dp" />
+        <TextView
+            android:id="@+id/location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Location"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@id/editProfileButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userProfileImage"
+            app:layout_constraintVertical_bias="0.648"
+            tools:ignore="HardcodedText" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="42dp"
-        android:layout_height="41dp"
-        android:src="@drawable/ic_arrow_back"
-        tools:layout_editor_absoluteY="2dp" />
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textAlignment="center"
+            android:textColor="#000000"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userProfileImage"
+            app:layout_constraintVertical_bias="0.85" />
+
+        <ImageView
+            android:id="@+id/userProfileImage"
+            android:layout_width="125dp"
+            android:layout_height="109dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.174"
+            tools:src="@tools:sample/avatars" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
