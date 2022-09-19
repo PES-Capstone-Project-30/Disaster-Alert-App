@@ -13,13 +13,13 @@ plugins {
     id("com.google.gms.google-services")
 }
 android {
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         applicationId = "com.jacob.disasteralertapp"
         minSdk = 29
         @SuppressLint("OldTargetApi")
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
