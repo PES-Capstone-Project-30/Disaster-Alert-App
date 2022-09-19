@@ -6,12 +6,12 @@ import com.google.firebase.auth.FirebaseAuth
 import javax.inject.Inject
 
 class AuthData @Inject constructor(
-	val firebaseAuth: FirebaseAuth,
+    val firebaseAuth: FirebaseAuth
 ) {
-	fun getLoggedInUser() = firebaseAuth.currentUser!!
+    fun getLoggedInUser() = firebaseAuth.currentUser!!
 
-	fun isUserPreviouslyLoggedIn(context: Context): Boolean {
-		GoogleSignIn.getLastSignedInAccount(context) ?: return false
-		return true
-	}
+    fun isUserPreviouslyLoggedIn(context: Context): Boolean {
+        GoogleSignIn.getLastSignedInAccount(context) ?: return false
+        return true
+    }
 }

@@ -19,59 +19,60 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.login_fragment) {
-	private val binding: LoginFragmentBinding by viewBinding()
-	private val viewModel: LoginViewModel by viewModels()
-	private lateinit var directions: NavDirections
+    private val binding: LoginFragmentBinding by viewBinding()
+    private val viewModel: LoginViewModel by viewModels()
+    private lateinit var directions: NavDirections
 
-	private val resultLauncher = registerForActivityResult(StartActivityForResult()) { result ->
-		when (result?.resultCode) {
-			Activity.RESULT_OK -> viewModel.handleGoogleSignInResult(result.data)
-			null -> Unit
-		}
-	}
+    private val resultLauncher = registerForActivityResult(StartActivityForResult()) { result ->
+        when (result?.resultCode) {
+            Activity.RESULT_OK -> viewModel.handleGoogleSignInResult(result.data)
+            null -> Unit
+        }
+    }
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
-//		if (viewModel.isLoggedIn(requireContext())) {
-//			findNavController().navigate(LoginFragmentDirections.toHomeFragment())
-//			return
-//		}
+// 		if (viewModel.isLoggedIn(requireContext())) {
+// 			findNavController().navigate(LoginFragmentDirections.toHomeFragment())
+// 			return
+// 		}
 
-		lifecycleScope.launch {
-			viewModel.loginState
-				.flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
-				.collect {
-					when (it) {
-						LoginState.Loading -> Unit
-						is LoginState.Error -> print(it.exception)
-						is LoginState.UserLoggedIn -> {
-							when (it.isNewUser) {
-								false -> findNavController().navigate(directions)
-								true -> findNavController().navigate(directions)
-							}
-						}
-					}
-				}
-		}
-	}
+        lifecycleScope.launch {
+            viewModel.loginState
+                .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
+                .collect {
+                    when (it) {
+                        LoginState.Loading -> Unit
+                        is LoginState.Error -> print(it.exception)
+                        is LoginState.UserLoggedIn -> {
+                            when (it.isNewUser) {
+                                false -> findNavController().navigate(directions)
+                                true -> findNavController().navigate(directions)
+                            }
+                        }
+                    }
+                }
+        }
+    }
 
-	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-		super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-		binding.userSignInButton.setOnClickListener {
-			directions = LoginFragmentDirections.toUserRegistrationDetailsFragment()
-			googleSignIn()
-		}
-		binding.ngoSignInButton.setOnClickListener {
-			directions = LoginFragmentDirections.toNgoRegistrationDetailsFragment()
-			googleSignIn()
-		}
-	}
+        binding.userSignInButton.setOnClickListener {
+            directions = LoginFragmentDirections.toUserRegistrationDetailsFragment()
+            googleSignIn()
+        }
+        binding.ngoSignInButton.setOnClickListener {
+            directions = LoginFragmentDirections.toNgoRegistrationDetailsFragment()
+            googleSignIn()
+        }
+    }
 
-	private fun googleSignIn() = resultLauncher.launch(
-		viewModel.getGoogleSignInIntent(
-			getString(R.string.default_web_client_id), requireActivity()
-		)
-	)
+    private fun googleSignIn() = resultLauncher.launch(
+        viewModel.getGoogleSignInIntent(
+            getString(R.string.default_web_client_id),
+            requireActivity()
+        )
+    )
 }

@@ -11,16 +11,16 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class UsersRepository @Inject constructor(
-	@UserCollection private val userCollection: CollectionReference,
+    @UserCollection private val userCollection: CollectionReference
 ) {
-	fun getAllUsers() = callbackFlow {
-		userCollection.get()
-			.await().documents.mapNotNull { it.toObject(UserDTO::class.java) }
-			.map(UserDTO::toUser)
-			.let(::trySend)
+    fun getAllUsers() = callbackFlow {
+        userCollection.get()
+            .await().documents.mapNotNull { it.toObject(UserDTO::class.java) }
+            .map(UserDTO::toUser)
+            .let(::trySend)
 
-		awaitClose()
-	}
+        awaitClose()
+    }
 
-	fun addUser(user: User) = userCollection.document(user.id).set(user)
+    fun addUser(user: User) = userCollection.document(user.id).set(user)
 }

@@ -7,9 +7,9 @@ import timber.log.Timber.DebugTree
 
 @HiltAndroidApp
 class DisasterAlertApp : Application() {
-	override fun onCreate() {
-		super.onCreate()
+    override fun onCreate() {
+        super.onCreate()
 
-		Timber.plant(DebugTree())
-	}
+        Timber.plant(DebugTree())
+    }
 }
