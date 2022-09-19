@@ -12,28 +12,28 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-	private val binding: ActivityMainBinding by viewBinding()
+    private val binding: ActivityMainBinding by viewBinding()
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		setContentView(binding.root)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
 
-		val navHostFragment =
-			supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
-		val navController = navHostFragment.findNavController()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.main_nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.findNavController()
 
-		binding.bottomNavBar.setupWithNavController(navController)
+        binding.bottomNavBar.setupWithNavController(navController)
 
-		navController.addOnDestinationChangedListener { _, destination, _ ->
-			val isLoginPage = destination.id == R.id.loginFragment
-			val isUserRegistrationPage = destination.id == R.id.userRegistrationDetailsFragment
-			val isNgoRegistrationPage = destination.id == R.id.ngoRegistrationDetailsFragment
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val isLoginPage = destination.id == R.id.loginFragment
+            val isUserRegistrationPage = destination.id == R.id.userRegistrationDetailsFragment
+            val isNgoRegistrationPage = destination.id == R.id.ngoRegistrationDetailsFragment
 
-			if (isLoginPage or isUserRegistrationPage or isNgoRegistrationPage) {
-				binding.bottomNavBar.visibility = View.GONE
-			} else {
-				binding.bottomNavBar.visibility = View.VISIBLE
-			}
-		}
-	}
+            if (isLoginPage or isUserRegistrationPage or isNgoRegistrationPage) {
+                binding.bottomNavBar.visibility = View.GONE
+            } else {
+                binding.bottomNavBar.visibility = View.VISIBLE
+            }
+        }
+    }
 }
