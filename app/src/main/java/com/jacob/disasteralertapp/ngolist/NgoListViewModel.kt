@@ -5,5 +5,4 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class NgoListViewModel @Inject constructor() : ViewModel() {
-}
+class NgoListViewModel @Inject constructor() : ViewModel()

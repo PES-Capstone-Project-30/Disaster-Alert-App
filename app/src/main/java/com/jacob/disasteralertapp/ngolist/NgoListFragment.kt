@@ -9,7 +9,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class NgoListFragment : Fragment(R.layout.ngo_list_fragment) {
-	private val binding: NgoListFragmentBinding by viewBinding()
-	private val viewModel: NgoListViewModel by viewModels()
-
+    private val binding: NgoListFragmentBinding by viewBinding()
+    private val viewModel: NgoListViewModel by viewModels()
 }

@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NgoRegistrationDetailsViewModel @Inject constructor() : ViewModel() {
-	fun getRegisteredNgos(): List<String> {
-		return listOf("a", "b", "c", "d", "e", "f", "g", "h", "i", "Other")
-	}
+    fun getRegisteredNgos(): List<String> {
+        return listOf("a", "b", "c", "d", "e", "f", "g", "h", "i", "Other")
+    }
 }

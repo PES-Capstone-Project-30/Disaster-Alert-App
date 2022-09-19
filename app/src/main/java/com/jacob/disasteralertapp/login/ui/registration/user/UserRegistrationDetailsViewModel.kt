@@ -9,28 +9,28 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserRegistrationDetailsViewModel @Inject constructor(
-	private val usersRepository: UsersRepository,
-	private val authData: AuthData,
+    private val usersRepository: UsersRepository,
+    private val authData: AuthData
 ) : ViewModel() {
-	private lateinit var selectedLocation: String
+    private lateinit var selectedLocation: String
 
-	fun getActiveLocations() = listOf("A", "B", "C", "D")
+    fun getActiveLocations() = listOf("A", "B", "C", "D")
 
-	fun setSelectedLocation(item: String) {
-		selectedLocation = item
-	}
+    fun setSelectedLocation(item: String) {
+        selectedLocation = item
+    }
 
-	fun onDoneClicked() {
-		val loggedInUser = authData.getLoggedInUser()
+    fun onDoneClicked() {
+        val loggedInUser = authData.getLoggedInUser()
 
-		val user = User(
-			id = loggedInUser.uid,
-			displayName = loggedInUser.displayName ?: "",
-			region = selectedLocation,
-			email = loggedInUser.email ?: "",
-			phone = loggedInUser.phoneNumber ?: "",
-		)
+        val user = User(
+            id = loggedInUser.uid,
+            displayName = loggedInUser.displayName ?: "",
+            region = selectedLocation,
+            email = loggedInUser.email ?: "",
+            phone = loggedInUser.phoneNumber ?: ""
+        )
 
-		usersRepository.addUser(user)
-	}
+        usersRepository.addUser(user)
+    }
 }
