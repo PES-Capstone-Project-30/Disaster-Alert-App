@@ -8,7 +8,15 @@ data class LocationDataDto(
     val lon: Double,
     val name: String,
     val type: String
-)
+) {
+    @Suppress("unused")
+    constructor() : this(
+        lat = 0.0,
+        lon = 0.0,
+        name = "",
+        type = ""
+    )
+}
 
 fun LocationDataDto.toLocationData(): LocationData = LocationData(
     latitude = lat,
