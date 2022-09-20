@@ -1,6 +1,7 @@
 package com.jacob.disasteralertapp
 
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -22,6 +23,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideFirestore() = Firebase.firestore
+
+    @Provides
+    @Singleton
+    fun provideFirebaseDatabase() = FirebaseDatabase.getInstance()
 
     @Provides
     @Singleton
