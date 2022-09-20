@@ -28,9 +28,23 @@
             android:src="@drawable/ic_arrow_back" />
 
         <Button
+            android:id="@+id/editProfileButton"
+            android:layout_width="217dp"
+            android:layout_height="64dp"
+            android:text="Edit Profile"
+            android:textSize="18sp"
+            app:icon="@android:drawable/ic_menu_edit"
+            app:layout_constraintBottom_toTopOf="@id/settingsButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/userProfileImage"
+            app:layout_constraintVertical_bias="0.899"
+            tools:ignore="HardcodedText" />
+
+        <Button
             android:id="@+id/logOutButton"
-            android:layout_width="253dp"
-            android:layout_height="59dp"
+            android:layout_width="217dp"
+            android:layout_height="64dp"
             android:text="Log Out"
             android:textSize="18sp"
             app:icon="@android:drawable/ic_lock_power_off"
@@ -38,13 +52,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/userProfileImage"
-            app:layout_constraintVertical_bias="0.83"
+            app:layout_constraintVertical_bias="0.757"
             tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/settingsButton"
-            android:layout_width="253dp"
-            android:layout_height="59dp"
+            android:layout_width="217dp"
+            android:layout_height="64dp"
             android:text="Settings"
             android:textSize="18sp"
             app:icon="@android:drawable/ic_menu_manage"
@@ -52,22 +66,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/userProfileImage"
-            app:layout_constraintVertical_bias="0.911"
+            app:layout_constraintVertical_bias="0.898"
             tools:ignore="HardcodedText" />
 
-        <Button
-            android:id="@+id/editProfileButton"
-            android:layout_width="253dp"
-            android:layout_height="59dp"
-            android:text="Edit Profile"
-            android:textSize="18sp"
-            app:icon="@android:drawable/ic_menu_edit"
+        <ImageView
+            android:id="@+id/userProfileImage"
+            android:layout_width="125dp"
+            android:layout_height="109dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/settingsButton"
-            app:layout_constraintTop_toBottomOf="@id/userProfileImage"
-            app:layout_constraintVertical_bias="0.88"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.139"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textAlignment="center"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userProfileImage"
+            app:layout_constraintVertical_bias="0.586" />
 
         <TextView
             android:id="@+id/location"
@@ -81,34 +107,8 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/userProfileImage"
-            app:layout_constraintVertical_bias="0.648"
+            app:layout_constraintVertical_bias="0.548"
             tools:ignore="HardcodedText" />
-
-        <TextView
-            android:id="@+id/userName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Username"
-            android:textAlignment="center"
-            android:textColor="#000000"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/location"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userProfileImage"
-            app:layout_constraintVertical_bias="0.85" />
-
-        <ImageView
-            android:id="@+id/userProfileImage"
-            android:layout_width="125dp"
-            android:layout_height="109dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.174"
-            tools:src="@tools:sample/avatars" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
