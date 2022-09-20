@@ -4,11 +4,11 @@ import com.google.firebase.firestore.CollectionReference
 import com.jacob.disasteralertapp.NgoCollection
 import com.jacob.disasteralertapp.NgoWorkersCollection
 import com.jacob.disasteralertapp.common.data.dtos.NgoOrganizationDetailsDTO
-import com.jacob.disasteralertapp.common.data.dtos.NgoUserDetailsDTO
+import com.jacob.disasteralertapp.common.data.dtos.NgoWorkerDetailsDTO
 import com.jacob.disasteralertapp.common.data.dtos.toNgoOrganizationDetails
 import com.jacob.disasteralertapp.common.data.dtos.toNgoUser
 import com.jacob.disasteralertapp.common.models.NgoOrganizationDetails
-import com.jacob.disasteralertapp.common.models.NgoUserDetails
+import com.jacob.disasteralertapp.common.models.NgoWorkerDetails
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
@@ -22,8 +22,8 @@ class NgoRepository @Inject constructor(
         ngoWorkersCollection.get()
             .await()
             .documents
-            .mapNotNull { it.toObject(NgoUserDetailsDTO::class.java) }
-            .map(NgoUserDetailsDTO::toNgoUser)
+            .mapNotNull { it.toObject(NgoWorkerDetailsDTO::class.java) }
+            .map(NgoWorkerDetailsDTO::toNgoUser)
             .let(::trySend)
 
         awaitClose()
@@ -40,8 +40,8 @@ class NgoRepository @Inject constructor(
         awaitClose()
     }
 
-    fun addNgoWorker(ngoUserDetails: NgoUserDetails) =
-        ngoWorkersCollection.document(ngoUserDetails.id).set(ngoUserDetails)
+    fun addNgoWorker(ngoWorkerDetails: NgoWorkerDetails) =
+        ngoWorkersCollection.document(ngoWorkerDetails.id).set(ngoWorkerDetails)
 
     fun addNgoOrganization(ngoOrganizationDetails: NgoOrganizationDetails) =
         ngoWorkersCollection.document(ngoOrganizationDetails.id).set(ngoOrganizationDetails)
