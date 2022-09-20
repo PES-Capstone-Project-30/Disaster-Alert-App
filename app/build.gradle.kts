@@ -1,7 +1,5 @@
 @file:Suppress("UnstableApiUsage", "SpellCheckingInspection")
 
-import android.annotation.SuppressLint
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -11,6 +9,8 @@ plugins {
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")
+
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 android {
     compileSdk = 33
@@ -18,7 +18,6 @@ android {
     defaultConfig {
         applicationId = "com.jacob.disasteralertapp"
         minSdk = 29
-        @SuppressLint("OldTargetApi")
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -72,11 +71,10 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.android.gms:play-services-maps:18.1.0")
 
     implementation("com.github.yogacp:android-viewbinding:1.0.4")
     implementation("com.jakewharton.timber:timber:5.0.1")
-
-    implementation("org.osmdroid:osmdroid-android:6.1.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
