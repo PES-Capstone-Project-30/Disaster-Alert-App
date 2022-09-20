@@ -10,16 +10,23 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.jacob.disasteralertapp.R
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.jacob.disasteralertapp.databinding.DisasterMapFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class DisasterMapFragment : Fragment(R.layout.disaster_map_fragment) {
+class DisasterMapFragment : Fragment(com.jacob.disasteralertapp.R.layout.disaster_map_fragment) {
     private val binding: DisasterMapFragmentBinding by viewBinding()
     private val viewModel: DisasterMapViewModel by viewModels()
+    private val markerList: MutableList<Marker> = mutableListOf()
     private lateinit var googleMap: GoogleMap
 
     private val requestPermissionLauncher =
@@ -52,6 +59,27 @@ class DisasterMapFragment : Fragment(R.layout.disaster_map_fragment) {
             googleMap = it
 
             googleMap.isMyLocationEnabled = true
+
+            showMarkers()
+        }
+    }
+
+    private fun showMarkers() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.locationDataFlow.collect {
+                    markerList.forEach(Marker::remove)
+
+                    it.map { locationData ->
+                        MarkerOptions()
+                            .position(LatLng(locationData.latitude, locationData.longitude))
+                            .draggable(false)
+                            .title(locationData.name)
+                    }
+                        .mapNotNull(googleMap::addMarker)
+                        .let(markerList::addAll)
+                }
+            }
         }
     }
 
