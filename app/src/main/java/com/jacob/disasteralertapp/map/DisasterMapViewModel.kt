@@ -2,6 +2,7 @@ package com.jacob.disasteralertapp.map
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jacob.disasteralertapp.common.AuthData
 import com.jacob.disasteralertapp.common.data.repositories.LocationRepository
 import com.jacob.disasteralertapp.common.models.LocationData
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,13 +14,11 @@ import timber.log.Timber
 
 @HiltViewModel
 class DisasterMapViewModel @Inject constructor(
-    private val locationRepository: LocationRepository
+    private val locationRepository: LocationRepository,
+    private val authData: AuthData
 ) : ViewModel() {
     private val isDisasterActive: Boolean
         get() = true
-
-    private val userCity: String
-        get() = "bangalore"
 
     private val _locationDataFlow: MutableStateFlow<List<LocationData>> = MutableStateFlow(
         emptyList()
@@ -40,7 +39,7 @@ class DisasterMapViewModel @Inject constructor(
 
         Timber.e("loading data")
         viewModelScope.launch {
-            locationRepository.getLocationForCity(userCity)
+            locationRepository.getLocationForCity(authData.currentUser!!.city)
                 .collect(_locationDataFlow::emit)
         }
     }

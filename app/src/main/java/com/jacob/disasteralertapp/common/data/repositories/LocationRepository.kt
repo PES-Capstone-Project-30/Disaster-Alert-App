@@ -6,6 +6,8 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.jacob.disasteralertapp.common.data.dtos.LocationDataDTO
 import com.jacob.disasteralertapp.common.data.dtos.toLocationData
+import com.jacob.disasteralertapp.common.models.BaseUser
+import com.jacob.disasteralertapp.common.models.LocationData
 import javax.inject.Inject
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
@@ -33,4 +35,9 @@ class LocationRepository @Inject constructor(
 
         awaitClose { reference.removeEventListener(listener) }
     }
+
+    fun updateUserLocationDetails(userDetails: BaseUser, locationData: LocationData) =
+        firebaseDatabase.getReference(userDetails.city)
+            .child(userDetails.id)
+            .setValue(locationData)
 }

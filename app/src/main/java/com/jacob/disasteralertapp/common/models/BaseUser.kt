@@ -1,6 +1,6 @@
 package com.jacob.disasteralertapp.common.models
 
-open class BaseUser(
+sealed class BaseUser(
     val id: String,
     val displayName: String,
     val email: String,
