@@ -5,14 +5,18 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat
+import androidx.hilt.work.HiltWorker
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.google.android.gms.location.LocationServices
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedInject
 import timber.log.Timber
 
-class UpdateLocationWorker(
-    private val context: Context,
-    private val workerParams: WorkerParameters
+@HiltWorker
+class UpdateLocationWorker @AssistedInject constructor(
+    @Assisted private val context: Context,
+    @Assisted private val workerParams: WorkerParameters
 ) : Worker(context, workerParams) {
 
     @SuppressLint("MissingPermission")
