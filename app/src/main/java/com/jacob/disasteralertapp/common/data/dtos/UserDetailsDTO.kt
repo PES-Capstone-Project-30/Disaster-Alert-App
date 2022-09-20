@@ -2,15 +2,15 @@ package com.jacob.disasteralertapp.common.data.dtos
 
 import com.google.firebase.firestore.IgnoreExtraProperties
 import com.google.firebase.firestore.PropertyName
-import com.jacob.disasteralertapp.common.models.User
+import com.jacob.disasteralertapp.common.models.UserDetails
 
 @IgnoreExtraProperties
-data class UserDTO(
+data class UserDetailsDTO(
     val id: String,
     @PropertyName("display_name") val displayName: String,
     val email: String,
     val phone: String,
-    val region: String
+    val city: String
 ) {
     @Suppress("unused")
     constructor() : this(
@@ -18,22 +18,22 @@ data class UserDTO(
         displayName = "",
         email = "",
         phone = "",
-        region = ""
+        city = ""
     )
 }
 
-fun UserDTO.toUser() = User(
+fun UserDetailsDTO.toUser() = UserDetails(
     id = id,
     displayName = displayName,
     email = email,
     phone = phone,
-    region = region
+    city = city
 )
 
-fun User.toUserDTO() = UserDTO(
+fun UserDetails.toUserDetailsDTO() = UserDetailsDTO(
     id = id,
     displayName = displayName,
     email = email,
     phone = phone,
-    region = region
+    city = city
 )

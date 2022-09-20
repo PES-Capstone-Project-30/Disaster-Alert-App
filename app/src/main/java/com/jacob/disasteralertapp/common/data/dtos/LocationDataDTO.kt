@@ -3,7 +3,7 @@ package com.jacob.disasteralertapp.common.data.dtos
 import com.jacob.disasteralertapp.common.models.LocationData
 import com.jacob.disasteralertapp.common.models.UserType
 
-data class LocationDataDto(
+data class LocationDataDTO(
     val lat: Double,
     val lon: Double,
     val name: String,
@@ -18,7 +18,7 @@ data class LocationDataDto(
     )
 }
 
-fun LocationDataDto.toLocationData(): LocationData = LocationData(
+fun LocationDataDTO.toLocationData(): LocationData = LocationData(
     latitude = lat,
     longitude = lon,
     name = name,

@@ -3,7 +3,7 @@ package com.jacob.disasteralertapp.login.ui.registration.user
 import androidx.lifecycle.ViewModel
 import com.jacob.disasteralertapp.common.AuthData
 import com.jacob.disasteralertapp.common.data.repositories.UsersRepository
-import com.jacob.disasteralertapp.common.models.User
+import com.jacob.disasteralertapp.common.models.UserDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -23,14 +23,14 @@ class UserRegistrationDetailsViewModel @Inject constructor(
     fun onDoneClicked() {
         val loggedInUser = authData.getLoggedInUser()
 
-        val user = User(
+        val userDetails = UserDetails(
             id = loggedInUser.uid,
             displayName = loggedInUser.displayName ?: "",
-            region = selectedLocation,
+            city = selectedLocation,
             email = loggedInUser.email ?: "",
             phone = loggedInUser.phoneNumber ?: ""
         )
 
-        usersRepository.addUser(user)
+        usersRepository.addUser(userDetails)
     }
 }

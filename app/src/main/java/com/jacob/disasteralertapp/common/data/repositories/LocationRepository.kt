@@ -4,7 +4,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.jacob.disasteralertapp.common.data.dtos.LocationDataDto
+import com.jacob.disasteralertapp.common.data.dtos.LocationDataDTO
 import com.jacob.disasteralertapp.common.data.dtos.toLocationData
 import javax.inject.Inject
 import kotlinx.coroutines.channels.awaitClose
@@ -19,8 +19,8 @@ class LocationRepository @Inject constructor(
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children
-                    .mapNotNull { it.getValue(LocationDataDto::class.java) }
-                    .map(LocationDataDto::toLocationData)
+                    .mapNotNull { it.getValue(LocationDataDTO::class.java) }
+                    .map(LocationDataDTO::toLocationData)
                     .let(::trySendBlocking)
             }
 

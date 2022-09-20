@@ -1,9 +1,9 @@
 package com.jacob.disasteralertapp.common.models
 
-data class User(
+data class UserDetails(
     val id: String,
     val displayName: String,
     val email: String,
     val phone: String,
-    val region: String
+    val city: String
 )
