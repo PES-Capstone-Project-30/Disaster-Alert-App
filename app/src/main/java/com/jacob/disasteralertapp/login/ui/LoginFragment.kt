@@ -33,10 +33,10 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-// 		if (viewModel.isLoggedIn(requireContext())) {
-// 			findNavController().navigate(LoginFragmentDirections.toHomeFragment())
-// 			return
-// 		}
+        if (viewModel.isLoggedIn(requireContext())) {
+            findNavController().navigate(LoginFragmentDirections.toHomeFragment())
+            return
+        }
 
         lifecycleScope.launch {
             viewModel.loginState

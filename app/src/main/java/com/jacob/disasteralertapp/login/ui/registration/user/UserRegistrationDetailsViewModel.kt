@@ -32,5 +32,6 @@ class UserRegistrationDetailsViewModel @Inject constructor(
         )
 
         usersRepository.addUser(userDetails)
+        authData.userLoggedIn(userDetails)
     }
 }
