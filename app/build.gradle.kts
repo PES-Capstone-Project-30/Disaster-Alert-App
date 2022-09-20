@@ -72,6 +72,9 @@ dependencies {
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
     implementation("com.google.android.gms:play-services-maps:18.1.0")
+    implementation("com.google.android.gms:play-services-location:20.0.0")
+
+    implementation("androidx.work:work-runtime-ktx:2.7.1")
 
     implementation("com.github.yogacp:android-viewbinding:1.0.4")
     implementation("com.jakewharton.timber:timber:5.0.1")
