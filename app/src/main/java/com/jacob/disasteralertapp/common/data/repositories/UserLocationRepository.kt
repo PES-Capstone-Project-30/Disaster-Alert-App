@@ -10,7 +10,6 @@ import com.jacob.disasteralertapp.common.models.BaseUser
 import com.jacob.disasteralertapp.common.models.LocationData
 import javax.inject.Inject
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.callbackFlow
 
 class UserLocationRepository @Inject constructor(
@@ -23,7 +22,7 @@ class UserLocationRepository @Inject constructor(
                 snapshot.children
                     .mapNotNull { it.getValue(LocationDataDTO::class.java) }
                     .map(LocationDataDTO::toLocationData)
-                    .let(::trySendBlocking)
+                    .let(::trySend)
             }
 
             override fun onCancelled(error: DatabaseError) {

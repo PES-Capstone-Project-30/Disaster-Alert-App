@@ -17,3 +17,8 @@ fun NgoOrganizationDetailsDTO.toNgoOrganizationDetails() = NgoOrganizationDetail
     id = id,
     name = name
 )
+
+fun NgoOrganizationDetails.toNgoOrganizationDetailsDTO() = NgoOrganizationDetailsDTO(
+    id = id,
+    name = name
+)

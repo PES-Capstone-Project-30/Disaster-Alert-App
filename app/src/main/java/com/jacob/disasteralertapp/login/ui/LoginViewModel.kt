@@ -9,6 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.GoogleAuthProvider
 import com.jacob.disasteralertapp.common.AuthData
+import com.jacob.disasteralertapp.common.data.repositories.NgoRepository
 import com.jacob.disasteralertapp.common.data.repositories.UsersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -21,7 +22,8 @@ import kotlinx.coroutines.launch
 class LoginViewModel @Inject constructor(
     application: Application,
     private val authData: AuthData,
-    private val usersRepository: UsersRepository
+    private val usersRepository: UsersRepository,
+    private val ngoWorkerRepository: NgoRepository
 ) : AndroidViewModel(application) {
     private val _loginState = MutableSharedFlow<LoginState>()
     val loginState: SharedFlow<LoginState> = _loginState
@@ -32,9 +34,13 @@ class LoginViewModel @Inject constructor(
     init {
         if (authData.isUserPreviouslyLoggedIn(context)) {
             viewModelScope.launch {
-                usersRepository.getUserById(authData.getLoggedInFirebaseUser().uid)
+                val firebaseUser = authData.getLoggedInFirebaseUser()
+                val baseUser = usersRepository.getUserById(firebaseUser.uid)
                     .firstOrNull()
-                    ?.let(authData::userLoggedIn)
+                    ?: ngoWorkerRepository.findNgoWorkerById(firebaseUser.uid)
+                        .firstOrNull()
+
+                baseUser?.let(authData::userLoggedIn)
                 updateUiState(LoginState.UserLoggedIn(isNewUser = false))
             }
         }

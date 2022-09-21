@@ -2,8 +2,8 @@ package com.jacob.disasteralertapp.common.data.repositories
 
 import com.google.firebase.database.FirebaseDatabase
 import javax.inject.Inject
-import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.tasks.await
 
 class DisasterDataRepository @Inject constructor(
     private val firebaseDatabase: FirebaseDatabase
@@ -13,9 +13,9 @@ class DisasterDataRepository @Inject constructor(
             .child(DISASTER_DATA)
             .child(IS_ACTIVE)
             .get()
-            .addOnSuccessListener {
-                trySendBlocking(it.getValue(Boolean::class.java) ?: false)
-            }
+            .await()
+            .getValue(Boolean::class.java)
+            .let { trySend(it ?: false) }
     }
 
     companion object {

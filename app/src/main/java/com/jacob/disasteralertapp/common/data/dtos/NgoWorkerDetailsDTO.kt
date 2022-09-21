@@ -21,7 +21,16 @@ data class NgoWorkerDetailsDTO(
     )
 }
 
-fun NgoWorkerDetailsDTO.toNgoUser(): NgoWorkerDetails = NgoWorkerDetails(
+fun NgoWorkerDetailsDTO.toNgoWorker(): NgoWorkerDetails = NgoWorkerDetails(
+    id = this.id,
+    displayName = this.displayName,
+    email = this.email,
+    phone = this.phone,
+    city = this.city,
+    ngoOrganization = this.ngoOrganization
+)
+
+fun NgoWorkerDetails.toNgoWorkerDTO(): NgoWorkerDetailsDTO = NgoWorkerDetailsDTO(
     id = this.id,
     displayName = this.displayName,
     email = this.email,
