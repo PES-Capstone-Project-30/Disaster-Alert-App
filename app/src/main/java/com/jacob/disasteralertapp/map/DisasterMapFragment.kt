@@ -17,9 +17,12 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_AZURE
+import com.google.android.gms.maps.model.BitmapDescriptorFactory.defaultMarker
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.jacob.disasteralertapp.common.models.LocationData
 import com.jacob.disasteralertapp.databinding.DisasterMapFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -70,6 +73,15 @@ class DisasterMapFragment : Fragment(com.jacob.disasteralertapp.R.layout.disaste
                     googleMap.animateCamera(cameraUpdate)
                 }
 
+            googleMap.setOnMarkerClickListener { marker ->
+                val locationData = marker.tag as LocationData
+                AlertDialog.Builder(requireActivity())
+                    .setTitle(locationData.name)
+                    .setMessage(locationData.toString())
+                    .show()
+
+                true
+            }
             showMarkers()
         }
     }
@@ -80,13 +92,17 @@ class DisasterMapFragment : Fragment(com.jacob.disasteralertapp.R.layout.disaste
                 viewModel.locationDataFlow.collect {
                     markerList.forEach(Marker::remove)
 
-                    it.map { locationData ->
-                        MarkerOptions()
+                    it.mapNotNull { locationData ->
+                        val markerOptions = MarkerOptions()
                             .position(LatLng(locationData.latitude, locationData.longitude))
                             .draggable(false)
+                            .icon(defaultMarker(HUE_AZURE))
                             .title(locationData.name)
+
+                        googleMap.addMarker(markerOptions)?.also { marker ->
+                            marker.tag = locationData
+                        }
                     }
-                        .mapNotNull(googleMap::addMarker)
                         .let(markerList::addAll)
                 }
             }
