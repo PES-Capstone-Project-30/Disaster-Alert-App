@@ -1,4 +1,4 @@
-package com.jacob.disasteralertapp.map.location
+package com.jacob.disasteralertapp.common.workers
 
 import android.Manifest
 import android.annotation.SuppressLint

@@ -1,4 +1,4 @@
-package com.jacob.disasteralertapp
+package com.jacob.disasteralertapp.common.notification
 
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
@@ -10,6 +10,8 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.jacob.disasteralertapp.MainActivity
+import com.jacob.disasteralertapp.R
 
 class ShowNotification : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
