@@ -16,6 +16,7 @@ import com.jacob.disasteralertapp.R
 import com.jacob.disasteralertapp.databinding.LoginFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class LoginFragment : Fragment(R.layout.login_fragment) {
@@ -33,21 +34,18 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (viewModel.isLoggedIn(requireContext())) {
-            findNavController().navigate(LoginFragmentDirections.toHomeFragment())
-            return
-        }
-
         lifecycleScope.launch {
             viewModel.loginState
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect {
                     when (it) {
                         LoginState.Loading -> Unit
-                        is LoginState.Error -> print(it.exception)
+                        is LoginState.Error -> Timber.e(it.exception)
                         is LoginState.UserLoggedIn -> {
                             when (it.isNewUser) {
-                                false -> findNavController().navigate(directions)
+                                false -> findNavController().navigate(
+                                    LoginFragmentDirections.toHomeFragment()
+                                )
                                 true -> findNavController().navigate(directions)
                             }
                         }

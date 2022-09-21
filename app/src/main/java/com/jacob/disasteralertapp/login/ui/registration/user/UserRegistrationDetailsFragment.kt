@@ -21,6 +21,9 @@ class UserRegistrationDetailsFragment : Fragment(R.layout.user_registration_deta
         super.onViewCreated(view, savedInstanceState)
 
         binding.doneBtn.setOnClickListener {
+            val autoCompleteTextView = binding.selectLocation.editText as? AutoCompleteTextView
+            val selectedText = autoCompleteTextView!!.text.toString()
+
             findNavController().navigate(
                 UserRegistrationDetailsFragmentDirections.toNgoListFragment()
             )
@@ -34,9 +37,7 @@ class UserRegistrationDetailsFragment : Fragment(R.layout.user_registration_deta
         val autoCompleteTextView = binding.selectLocation.editText as? AutoCompleteTextView
         autoCompleteTextView?.setAdapter(adapter)
 
-        autoCompleteTextView?.setOnItemClickListener { adapterView, _, position, _ ->
-            val item = adapterView.getItemAtPosition(position) as String
-            viewModel.setSelectedLocation(item)
+        autoCompleteTextView?.setOnItemClickListener { _, _, _, _ ->
             binding.doneBtn.isEnabled = true
         }
     }

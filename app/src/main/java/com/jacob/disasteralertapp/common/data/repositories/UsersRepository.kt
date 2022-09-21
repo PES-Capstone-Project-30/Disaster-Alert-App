@@ -22,5 +22,16 @@ class UsersRepository @Inject constructor(
         awaitClose()
     }
 
+    fun getUserById(userId: String) = callbackFlow {
+        userCollection.document(userId)
+            .get()
+            .await()
+            .toObject(UserDetailsDTO::class.java)
+            ?.toUser()
+            ?.let(::trySend)
+
+        awaitClose()
+    }
+
     fun addUser(userDetails: UserDetails) = userCollection.document(userDetails.id).set(userDetails)
 }

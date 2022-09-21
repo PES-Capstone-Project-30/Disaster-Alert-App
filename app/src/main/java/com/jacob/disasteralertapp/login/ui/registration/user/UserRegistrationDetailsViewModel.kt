@@ -12,16 +12,10 @@ class UserRegistrationDetailsViewModel @Inject constructor(
     private val usersRepository: UsersRepository,
     private val authData: AuthData
 ) : ViewModel() {
-    private lateinit var selectedLocation: String
-
     fun getActiveLocations() = listOf("A", "B", "C", "D")
 
-    fun setSelectedLocation(item: String) {
-        selectedLocation = item
-    }
-
-    fun onDoneClicked() {
-        val loggedInUser = authData.getLoggedInUser()
+    fun onDoneClicked(selectedLocation: String) {
+        val loggedInUser = authData.getLoggedInFirebaseUser()
 
         val userDetails = UserDetails(
             id = loggedInUser.uid,
