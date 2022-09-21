@@ -5,14 +5,14 @@ import com.jacob.disasteralertapp.common.models.UserType
 
 data class LocationDataDTO(
     val lat: Double,
-    val lon: Double,
+    val lng: Double,
     val name: String,
     val type: String
 ) {
     @Suppress("unused")
     constructor() : this(
         lat = 0.0,
-        lon = 0.0,
+        lng = 0.0,
         name = "",
         type = ""
     )
@@ -20,7 +20,7 @@ data class LocationDataDTO(
 
 fun LocationDataDTO.toLocationData(): LocationData = LocationData(
     latitude = lat,
-    longitude = lon,
+    longitude = lng,
     name = name,
     type = UserType.valueOf(type)
 )

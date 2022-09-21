@@ -10,7 +10,7 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.google.android.gms.location.LocationServices
 import com.jacob.disasteralertapp.common.AuthData
-import com.jacob.disasteralertapp.common.data.repositories.LocationRepository
+import com.jacob.disasteralertapp.common.data.repositories.UserLocationRepository
 import com.jacob.disasteralertapp.common.models.LocationData
 import com.jacob.disasteralertapp.common.models.NgoWorkerDetails
 import com.jacob.disasteralertapp.common.models.UserDetails
@@ -24,7 +24,7 @@ class UpdateLocationWorker @AssistedInject constructor(
     @Assisted private val context: Context,
     @Assisted private val workerParams: WorkerParameters,
     private val authData: AuthData,
-    private val locationRepository: LocationRepository
+    private val userLocationRepository: UserLocationRepository
 ) : Worker(context, workerParams) {
 
     @SuppressLint("MissingPermission")
@@ -45,7 +45,7 @@ class UpdateLocationWorker @AssistedInject constructor(
                             is NgoWorkerDetails -> UserType.NGO_WORKER
                         }
                     )
-                    locationRepository.updateUserLocationDetails(currentUser, locationData)
+                    userLocationRepository.updateUserLocationDetails(currentUser, locationData)
                 }
 
             Result.success()

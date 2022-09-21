@@ -13,11 +13,11 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.callbackFlow
 
-class LocationRepository @Inject constructor(
+class UserLocationRepository @Inject constructor(
     private val firebaseDatabase: FirebaseDatabase
 ) {
     fun getLocationForCity(city: String) = callbackFlow {
-        val reference = firebaseDatabase.getReference(city)
+        val userLocationDataDbRef = firebaseDatabase.getReference(city).child(USER_LOCATION_DATA)
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children
@@ -31,13 +31,18 @@ class LocationRepository @Inject constructor(
             }
         }
 
-        reference.addValueEventListener(listener)
+        userLocationDataDbRef.addValueEventListener(listener)
 
-        awaitClose { reference.removeEventListener(listener) }
+        awaitClose { userLocationDataDbRef.removeEventListener(listener) }
     }
 
     fun updateUserLocationDetails(userDetails: BaseUser, locationData: LocationData) =
         firebaseDatabase.getReference(userDetails.city)
+            .child(USER_LOCATION_DATA)
             .child(userDetails.id)
             .setValue(locationData)
+
+    companion object {
+        private const val USER_LOCATION_DATA = "user_location_data"
+    }
 }
