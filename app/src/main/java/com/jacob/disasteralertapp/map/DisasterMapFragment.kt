@@ -13,6 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -41,12 +43,9 @@ class DisasterMapFragment : Fragment(com.jacob.disasteralertapp.R.layout.disaste
         super.onViewCreated(view, savedInstanceState)
 
         when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED -> setUpMap()
-            shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> showAlert()
-            else -> requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            locationPermissionIsGranted() -> setUpMap()
+            locationPermissionIsNotGranted() -> showAlert()
+            else -> requestLocationPermission()
         }
     }
 
@@ -59,6 +58,17 @@ class DisasterMapFragment : Fragment(com.jacob.disasteralertapp.R.layout.disaste
             googleMap = it
 
             googleMap.isMyLocationEnabled = true
+
+            LocationServices.getFusedLocationProviderClient(requireContext())
+                .lastLocation
+                .addOnCompleteListener(requireActivity()) { locationTask ->
+                    if (!locationTask.isSuccessful) return@addOnCompleteListener
+                    val location = locationTask.result ?: return@addOnCompleteListener
+
+                    val latLng = LatLng(location.latitude, location.longitude)
+                    val cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 14f)
+                    googleMap.animateCamera(cameraUpdate)
+                }
 
             showMarkers()
         }
@@ -91,4 +101,15 @@ class DisasterMapFragment : Fragment(com.jacob.disasteralertapp.R.layout.disaste
         it.setNeutralButton("OK", null)
         it.create()
     }.show()
+
+    private fun locationPermissionIsNotGranted() =
+        shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION)
+
+    private fun locationPermissionIsGranted() = ContextCompat.checkSelfPermission(
+        requireContext(),
+        Manifest.permission.ACCESS_FINE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED
+
+    private fun requestLocationPermission() =
+        requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
 }

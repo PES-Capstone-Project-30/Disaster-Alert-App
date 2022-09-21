@@ -7,6 +7,7 @@
       <list>
         <option value="max-line-length" />
         <option value="no-wildcard-imports" />
+        <option value="max-line-length" />
       </list>
     </disabledRules>
   </component>
