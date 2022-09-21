@@ -1,6 +1,7 @@
 package com.jacob.disasteralertapp
 
 import android.os.Bundle
+import android.view.View
 import android.viewbinding.library.activity.viewBinding
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
@@ -29,9 +30,9 @@ class MainActivity : AppCompatActivity() {
 			val isNgoRegistrationPage = destination.id == R.id.ngoRegistrationDetailsFragment
 
 			if (isLoginPage or isUserRegistrationPage or isNgoRegistrationPage) {
-				binding.bottomNavBar.visibility = android.view.View.GONE
+				binding.bottomNavBar.visibility = View.GONE
 			} else {
-				binding.bottomNavBar.visibility = android.view.View.VISIBLE
+				binding.bottomNavBar.visibility = View.VISIBLE
 			}
 		}
 	}

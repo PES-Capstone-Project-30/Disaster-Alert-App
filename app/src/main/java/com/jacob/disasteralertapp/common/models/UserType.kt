@@ -1,3 +1,6 @@
 package com.jacob.disasteralertapp.common.models
 
-data class Ngo(val name: String)
+enum class UserType {
+    USER,
+    NGO_WORKER
+}
