@@ -12,15 +12,22 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.jacob.disasteralertapp.MainActivity
 import com.jacob.disasteralertapp.R
+import com.jacob.disasteralertapp.common.AuthData
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ShowNotification : FirebaseMessagingService() {
+    @Inject
+    lateinit var authData: AuthData
+
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        if (remoteMessage.notification != null) {
-            generateNotification(
-                remoteMessage.notification!!.title!!,
-                remoteMessage.notification!!.body!!
-            )
-        }
+        if (remoteMessage.notification == null) return
+
+        generateNotification(
+            remoteMessage.notification!!.title!!,
+            remoteMessage.notification!!.body!!
+        )
     }
 
     private fun getRemoteView(title: String, message: String): RemoteViews =
