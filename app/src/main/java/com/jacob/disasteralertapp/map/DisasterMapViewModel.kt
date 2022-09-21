@@ -10,7 +10,6 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @HiltViewModel
 class DisasterMapViewModel @Inject constructor(
@@ -37,7 +36,6 @@ class DisasterMapViewModel @Inject constructor(
     private fun getLocationDetails() {
         if (!isDisasterActive) return
 
-        Timber.e("loading data")
         viewModelScope.launch {
             userLocationRepository.getLocationForCity(authData.currentUser!!.city)
                 .collect(_locationDataFlow::emit)

@@ -1,9 +1,9 @@
 package com.jacob.disasteralertapp.common.data.repositories
 
 import com.google.firebase.database.FirebaseDatabase
+import javax.inject.Inject
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.callbackFlow
-import javax.inject.Inject
 
 class DisasterDataRepository @Inject constructor(
     private val firebaseDatabase: FirebaseDatabase
