@@ -39,7 +39,7 @@ class LoginFragment : Fragment(R.layout.login_fragment) {
                 .flowWithLifecycle(lifecycle, Lifecycle.State.STARTED)
                 .collect {
                     when (it) {
-                        LoginState.Loading -> Unit
+                        LoginState.Loading -> Unit // TODO: ADD LOADING INDICATOR
                         is LoginState.Error -> Timber.e(it.exception)
                         is LoginState.UserLoggedIn -> {
                             when (it.isNewUser) {

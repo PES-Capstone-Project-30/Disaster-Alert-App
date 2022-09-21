@@ -61,7 +61,7 @@ class DisasterMapFragment : Fragment(com.jacob.disasteralertapp.R.layout.disaste
 
             LocationServices.getFusedLocationProviderClient(requireContext())
                 .lastLocation
-                .addOnCompleteListener(requireActivity()) { locationTask ->
+                .addOnCompleteListener { locationTask ->
                     if (!locationTask.isSuccessful) return@addOnCompleteListener
                     val location = locationTask.result ?: return@addOnCompleteListener
 

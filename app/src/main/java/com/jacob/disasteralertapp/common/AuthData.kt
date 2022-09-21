@@ -7,6 +7,7 @@ import com.jacob.disasteralertapp.common.models.BaseUser
 import javax.inject.Inject
 import javax.inject.Singleton
 
+// TODO: SAVE AND LOAD USER DETAILS TO LOCAL DATASTORE TO AVOID CALLING FIREBASE EVERY TIME
 @Singleton
 class AuthData @Inject constructor(
     val firebaseAuth: FirebaseAuth
