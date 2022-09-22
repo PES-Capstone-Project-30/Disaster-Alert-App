@@ -51,16 +51,11 @@
         </service>
 
         <!-- https://developer.android.com/topic/libraries/architecture/workmanager/advanced/custom-configuration#on-demand -->
+        <!-- https://stackoverflow.com/a/67469257/13181948 -->
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
-            android:exported="false"
-            tools:node="merge">
-            <!-- If you are using androidx.startup to initialize other components -->
-            <meta-data
-                android:name="androidx.work.WorkManagerInitializer"
-                android:value="androidx.startup"
-                tools:node="remove" />
+            tools:node="remove">
         </provider>
     </application>
 </manifest>
