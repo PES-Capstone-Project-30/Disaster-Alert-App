@@ -52,7 +52,7 @@ class UpdateLocationWorker @AssistedInject constructor(
 
             if (!isPermissionGranted()) {
                 Timber.e("Location permission not granted")
-                return Result.failure()
+                return Result.retry()
             }
 
             LocationServices.getFusedLocationProviderClient(context)
@@ -118,7 +118,7 @@ class UpdateLocationWorker @AssistedInject constructor(
             WorkManager.getInstance(context)
                 .enqueueUniquePeriodicWork(
                     TAG,
-                    ExistingPeriodicWorkPolicy.KEEP,
+                    ExistingPeriodicWorkPolicy.REPLACE,
                     workRequest
                 )
         }

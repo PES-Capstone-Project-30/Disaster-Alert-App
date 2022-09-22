@@ -13,6 +13,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.jacob.disasteralertapp.MainActivity
 import com.jacob.disasteralertapp.R
 import com.jacob.disasteralertapp.common.AuthData
+import com.jacob.disasteralertapp.common.workers.UpdateLocationWorker
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -28,6 +29,8 @@ class ShowNotification : FirebaseMessagingService() {
             remoteMessage.notification!!.title!!,
             remoteMessage.notification!!.body!!
         )
+
+        UpdateLocationWorker.createWorkerRequest(this)
     }
 
     private fun getRemoteView(title: String, message: String): RemoteViews =
