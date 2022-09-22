@@ -2,6 +2,7 @@ package com.jacob.disasteralertapp.common.data.repositories
 
 import com.google.firebase.database.FirebaseDatabase
 import javax.inject.Inject
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
@@ -16,6 +17,8 @@ class DisasterDataRepository @Inject constructor(
             .await()
             .getValue(Boolean::class.java)
             .let { trySend(it ?: false) }
+
+        awaitClose()
     }
 
     companion object {

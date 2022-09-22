@@ -6,6 +6,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.jacob.disasteralertapp.common.data.dtos.LocationDataDTO
 import com.jacob.disasteralertapp.common.data.dtos.toLocationData
+import com.jacob.disasteralertapp.common.data.dtos.toLocationDataDTO
 import com.jacob.disasteralertapp.common.models.BaseUser
 import com.jacob.disasteralertapp.common.models.LocationData
 import javax.inject.Inject
@@ -39,7 +40,7 @@ class UserLocationRepository @Inject constructor(
         firebaseDatabase.getReference(userDetails.city)
             .child(USER_LOCATION_DATA)
             .child(userDetails.id)
-            .setValue(locationData)
+            .setValue(locationData.toLocationDataDTO())
 
     companion object {
         private const val USER_LOCATION_DATA = "user_location_data"

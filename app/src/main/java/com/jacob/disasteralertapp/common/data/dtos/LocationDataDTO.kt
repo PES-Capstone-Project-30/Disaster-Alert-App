@@ -24,3 +24,10 @@ fun LocationDataDTO.toLocationData(): LocationData = LocationData(
     name = name,
     type = UserType.valueOf(type)
 )
+
+fun LocationData.toLocationDataDTO(): LocationDataDTO = LocationDataDTO(
+    lat = latitude,
+    lng = longitude,
+    name = name,
+    type = type.name
+)
