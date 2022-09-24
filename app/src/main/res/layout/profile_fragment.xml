@@ -8,14 +8,6 @@
     android:outlineProvider="none"
     tools:context=".profile.ProfileFragment">
 
-    <ImageView
-        android:id="@+id/goBackButton"
-        android:layout_width="42dp"
-        android:layout_height="41dp"
-        android:src="@drawable/ic_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/editProfileButton"
         android:layout_width="217dp"
