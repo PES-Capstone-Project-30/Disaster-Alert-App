@@ -22,4 +22,8 @@ class AuthData @Inject constructor(
     fun userLoggedIn(userDetails: BaseUser) {
         currentUser = userDetails
     }
+
+    fun userLogOut() {
+        firebaseAuth.signOut()
+    }
 }
